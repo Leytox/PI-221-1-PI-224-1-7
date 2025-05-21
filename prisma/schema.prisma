@@ -50,12 +50,17 @@ model Genre {
 }
 
 model Book {
-  id          String   @id @default(cuid())
+  id          String    @id @default(cuid())
   title       String
   author      String
   description String
+  image       String?
+  isbn        String?
+  pages       Int?
+  language    String?
+  publishedAt DateTime?
   genreId     String
-  genre       Genre    @relation(fields: [genreId], references: [id], onDelete: Cascade)
+  genre       Genre     @relation(fields: [genreId], references: [id], onDelete: Cascade)
   type        BookType
   price       Float
   orders      Order[]
