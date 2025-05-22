@@ -33,7 +33,7 @@ model User {
   lastName  String
   image     String?
   role      Role      @default(USER)
-  login     String    @unique
+  email     String    @unique
   password  String
   accounts  Account[]
   sessions  Session[]

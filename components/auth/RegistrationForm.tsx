@@ -20,9 +20,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { signUp } from "@/actions/auth";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const formSchema = z.object({
-  login: z.string().min(1),
+  email: z.string().email(),
   firstName: z
     .string()
     .min(4, { message: "First Name must be at least 4 characters" })
@@ -45,7 +46,7 @@ export function RegistrationForm({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      login: "",
+      email: "",
       firstName: "",
       lastName: "",
       password: "",
@@ -55,7 +56,7 @@ export function RegistrationForm({
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       await signUp(
-        values.login,
+        values.email,
         values.firstName,
         values.lastName,
         Role.USER,
@@ -129,20 +130,20 @@ export function RegistrationForm({
               </div>
               <FormField
                 control={form.control}
-                name="login"
+                name="email"
                 render={({ field }) => (
                   <FormItem className="grid gap-2">
-                    <FormLabel htmlFor="login">Login</FormLabel>
+                    <FormLabel htmlFor="email">Email</FormLabel>
                     <FormControl>
                       <Input
-                        id="login"
-                        type="text"
-                        placeholder="login"
+                        id="email"
+                        type="email"
+                        placeholder="example@email.com"
                         required
                         {...field}
                       />
                     </FormControl>
-                    <FormDescription>Enter login.</FormDescription>
+                    <FormDescription>Enter email.</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -179,6 +180,12 @@ export function RegistrationForm({
                   <ArrowRight />
                 )}
               </Button>
+              <p className="text-sm text-muted-foreground flex items-center gap-1 w-full justify-center">
+                <span>Already have an account?</span>
+                <Link href="/login" className="text-primary underline">
+                  Login
+                </Link>
+              </p>
             </div>
           </div>
         </div>

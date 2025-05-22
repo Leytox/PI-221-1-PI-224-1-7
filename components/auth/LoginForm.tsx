@@ -19,9 +19,9 @@ import { ArrowRight, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-
+import Link from "next/link";
 const formSchema = z.object({
-  login: z.string().min(1),
+  email: z.string().email(),
   password: z
     .string()
     .min(6, { message: "Password must be at least 6 characters" })
@@ -37,15 +37,15 @@ export function LoginForm({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      login: "",
+      email: "",
       password: "",
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      await signInCredentials(values.login, values.password);
-      router.push("/dashboard");
+      await signInCredentials(values.email, values.password);
+      router.push("/");
       toast.success("Logged in successfully");
     } catch (error) {
       const errorMessage =
@@ -67,20 +67,20 @@ export function LoginForm({
             >
               <FormField
                 control={form.control}
-                name="login"
+                name="email"
                 render={({ field }) => (
                   <FormItem className="grid gap-2">
-                    <FormLabel htmlFor="login">Login</FormLabel>
+                    <FormLabel htmlFor="email">Email</FormLabel>
                     <FormControl>
                       <Input
-                        id="login"
-                        type="text"
-                        placeholder="Login"
+                        id="email"
+                        type="email"
+                        placeholder="example@email.com"
                         required
                         {...field}
                       />
                     </FormControl>
-                    <FormDescription>Enter your login.</FormDescription>
+                    <FormDescription>Enter your email.</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -118,6 +118,12 @@ export function LoginForm({
                   <ArrowRight />
                 )}
               </Button>
+              <p className="text-sm text-muted-foreground flex items-center gap-1 w-full justify-center">
+                <span>Don&apos;t have an account?</span>
+                <Link href="/registration" className="text-primary underline">
+                  Register
+                </Link>
+              </p>
             </form>
           </Form>
         </div>

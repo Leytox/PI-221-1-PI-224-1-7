@@ -8,7 +8,7 @@ export async function signUp(
   firstName: string,
   lastName: string,
   role: Role,
-  password: string,
+  password: string
 ) {
   try {
     await createUser(login, firstName, lastName, role, password);

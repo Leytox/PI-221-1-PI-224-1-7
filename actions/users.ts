@@ -4,23 +4,23 @@ import { prisma } from "@/lib/prisma";
 import { Role } from "@/generated/prisma";
 
 export async function createUser(
-  login: string,
+  email: string,
   firstName: string,
   lastName: string,
   role: Role,
-  password: string,
+  password: string
 ) {
   try {
     const user = await prisma.user.findUnique({
       where: {
-        login,
+        email,
       },
     });
     if (user) throw new Error("User already exists");
     password = await bcrypt.hash(password, 10);
     return await prisma.user.create({
       data: {
-        login,
+        email,
         firstName,
         lastName,
         role,
@@ -33,10 +33,10 @@ export async function createUser(
   }
 }
 
-export async function getUserByLogin(login: string) {
+export async function getUserByEmail(email: string) {
   try {
     return await prisma.user.findUnique({
-      where: { login },
+      where: { email },
     });
   } catch (error) {
     console.error("Failed to fetch user:", error);
