@@ -4,24 +4,24 @@ import { signIn, signOut } from "@/auth";
 import { createUser } from "@/actions/users";
 
 export async function signUp(
-  login: string,
+  email: string,
   firstName: string,
   lastName: string,
   role: Role,
   password: string
 ) {
   try {
-    await createUser(login, firstName, lastName, role, password);
+    await createUser(email, firstName, lastName, role, password);
     return { success: true };
   } catch (error) {
     throw error;
   }
 }
 
-export async function signInCredentials(login: string, password: string) {
+export async function signInCredentials(email: string, password: string) {
   try {
     await signIn("credentials", {
-      login,
+      email,
       password,
       redirect: false,
     });
