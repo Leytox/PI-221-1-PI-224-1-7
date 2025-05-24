@@ -54,3 +54,37 @@ export async function getUserById(id: string) {
     return null;
   }
 }
+
+export async function getUsers() {
+  try {
+    return await prisma.user.findMany({
+      select: {
+        id: true,
+        email: true,
+        firstName: true,
+        lastName: true,
+        role: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+  } catch (error) {
+    console.error("Failed to fetch users:", error);
+    return [];
+  }
+}
+
+export async function updateUserRole(userId: string, role: Role) {
+  try {
+    return await prisma.user.update({
+      where: { id: userId },
+      data: { role },
+    });
+  } catch (error) {
+    console.error("Failed to update user role:", error);
+    return null;
+  }
+}
