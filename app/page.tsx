@@ -88,7 +88,7 @@ export default async function HomePage() {
               <TestimonialCard key={testimonial.id} quote={testimonial.quote} author={testimonial.author} />
             ))}
           </div>
-        </section>+
+        </section>
 
         {/* CTA Section */}
         <section className="text-center mb-20 py-12 bg-primary/10 rounded-xl">
