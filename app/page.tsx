@@ -94,7 +94,7 @@ export default async function HomePage() {
         <section className="text-center mb-20 py-12 bg-primary/10 rounded-xl">
           <h2 className="text-4xl font-bold mb-4 tracking-tight">Ready to Dive In?</h2>
           <p className="text-xl text-muted-foreground mb-8 max-w-xl mx-auto">Explore our vast collection or join our community events. Your next adventure awaits!</p>
-          <Link href="/browse-books" passHref>+
+          <Link href="/browse-books">
             <Button size="lg" className="text-lg p-7">Browse All Books</Button>
           </Link>
         </section>
