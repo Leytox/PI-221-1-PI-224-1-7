@@ -43,3 +43,14 @@ export async function getUserByEmail(email: string) {
     return null;
   }
 }
+
+export async function getUserById(id: string) {
+  try {
+    return await prisma.user.findUnique({
+      where: { id },
+    });
+  } catch (error) {
+    console.error("Failed to fetch user:", error);
+    return null;
+  }
+}

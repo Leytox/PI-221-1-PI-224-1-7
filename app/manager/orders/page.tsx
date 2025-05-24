@@ -1,13 +1,7 @@
-import { Role } from "@/generated/prisma";
-import { auth } from "@/middleware";
-import { redirect } from "next/navigation";
 import { getOrders } from "@/actions/orders";
 import { OrdersTable } from "./orders-table";
 
 export default async function OrdersPage() {
-  const session = await auth();
-  if (!session || session.user.role === Role.USER) redirect("/");
-
   const orders = await getOrders();
 
   return (
