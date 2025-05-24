@@ -51,7 +51,8 @@ model Genre {
 
 model Book {
   id          String    @id @default(cuid())
-  title       String
+  title       String    @unique
+  slug        String?   @unique
   author      String
   description String
   image       String?
@@ -63,6 +64,7 @@ model Book {
   genre       Genre     @relation(fields: [genreId], references: [id], onDelete: Cascade)
   type        BookType
   price       Float
+  rating      Float?
   orders      Order[]
 
   createdAt DateTime @default(now())
