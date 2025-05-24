@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useState, useMemo } from "react";
 import { Book, BookType, Genre } from "@/generated/prisma";
 import {
   Table,
@@ -10,11 +11,14 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { useState } from "react";
 import { BookDialog } from "./book-dialog";
 import { createBook, updateBook, deleteBook } from "@/actions/books";
 import { toast } from "sonner";
+import { ArrowUpDown } from "lucide-react";
+
+type BookSortKey = "title" | "author" | "type" | "price";
 
 export function BooksTable({
   books: initialBooks,
@@ -26,6 +30,11 @@ export function BooksTable({
   const [books, setBooks] = useState(initialBooks);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortConfig, setSortConfig] = useState<{
+    key: BookSortKey;
+    direction: "asc" | "desc" | "none";
+  }>({ key: "title", direction: "none" });
 
   const handleAddBook = () => {
     setSelectedBook(null);
@@ -104,24 +113,87 @@ export function BooksTable({
     }
   };
 
+  const filteredAndSortedBooks = useMemo(() => {
+    let filtered = [...books]; // Create a new array for in-place sort
+    if (searchTerm) {
+      const lowercasedSearchTerm = searchTerm.toLowerCase();
+      filtered = filtered.filter((book) =>
+        book.title.toLowerCase().includes(lowercasedSearchTerm) ||
+        book.author.toLowerCase().includes(lowercasedSearchTerm)
+      );
+    }
+
+    if (sortConfig.direction !== "none") {
+      filtered.sort((a, b) => {
+        let valA = a[sortConfig.key];
+        let valB = b[sortConfig.key];
+
+        if (typeof valA === "string" && typeof valB === "string") {
+          valA = valA.toLowerCase();
+          valB = valB.toLowerCase();
+        }
+        // For price, ensure numeric comparison
+        if (sortConfig.key === 'price') {
+            valA = Number(valA);
+            valB = Number(valB);
+        }
+
+        if (valA < valB) return sortConfig.direction === "asc" ? -1 : 1;
+        if (valA > valB) return sortConfig.direction === "asc" ? 1 : -1;
+        return 0;
+      });
+    }
+    return filtered;
+  }, [books, searchTerm, sortConfig]);
+
+  const handleSort = (key: BookSortKey) => {
+    let direction: "asc" | "desc" | "none" = "asc";
+    if (sortConfig.key === key && sortConfig.direction === "asc") {
+      direction = "desc";
+    } else if (sortConfig.key === key && sortConfig.direction === "desc") {
+      direction = "none"; 
+    } else {
+      direction = "asc"; // Default to asc for new column or if current is none
+    }
+    setSortConfig({ key, direction });
+  };
+
+  const SortableHeader = ({ sortKey, children }: { sortKey: BookSortKey; children: React.ReactNode }) => (
+    <TableHead>
+      <Button variant="ghost" onClick={() => handleSort(sortKey)} className="px-2">
+        {children}
+        {sortConfig.key === sortKey && sortConfig.direction === "asc" && <ArrowUpDown className="ml-2 h-4 w-4" />}
+        {sortConfig.key === sortKey && sortConfig.direction === "desc" && <ArrowUpDown className="ml-2 h-4 w-4 transform rotate-180" />}
+        {sortConfig.key === sortKey && sortConfig.direction === "none" && <ArrowUpDown className="ml-2 h-4 w-4 text-muted-foreground opacity-50" />}
+        {sortConfig.key !== sortKey && <ArrowUpDown className="ml-2 h-4 w-4 text-muted-foreground opacity-0 group-hover:opacity-50 transition-opacity" />}
+      </Button>
+    </TableHead>
+  );
+
   return (
     <div className="space-y-4">
-      <div className="flex justify-end">
+      <div className="flex justify-between items-center gap-4">
+        <Input
+          placeholder="Search by title or author..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="max-w-sm"
+        />
         <Button onClick={handleAddBook}>Add Book</Button>
       </div>
       <div className="rounded-md border">
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Title</TableHead>
-              <TableHead>Author</TableHead>
-              <TableHead>Type</TableHead>
-              <TableHead>Price</TableHead>
+              <SortableHeader sortKey="title">Title</SortableHeader>
+              <SortableHeader sortKey="author">Author</SortableHeader>
+              <SortableHeader sortKey="type">Type</SortableHeader>
+              <SortableHeader sortKey="price">Price</SortableHeader>
               <TableHead>Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {books.map((book) => (
+            {filteredAndSortedBooks.map((book) => (
               <TableRow key={book.id}>
                 <TableCell className="font-medium">{book.title}</TableCell>
                 <TableCell>{book.author}</TableCell>
