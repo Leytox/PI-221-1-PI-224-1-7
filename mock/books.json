@@ -12,7 +12,8 @@
       "publishedAt": "2020-08-13T00:00:00.000Z",
       "genreId": "Fiction",
       "type": "PAPER",
-      "price": 24.99
+      "price": 24.99,
+      "rating": 3.5
     },
     {
       "title": "Project Hail Mary",
@@ -26,7 +27,8 @@
       "publishedAt": "2021-05-04T00:00:00.000Z",
       "genreId": "Science Fiction",
       "type": "ELECTRONIC",
-      "price": 19.99
+      "price": 19.99,
+      "rating": 4.5
     },
     {
       "title": "Klara and the Sun",
@@ -40,7 +42,8 @@
       "publishedAt": "2021-03-02T00:00:00.000Z",
       "genreId": "Literary Fiction",
       "type": "AUDIO",
-      "price": 29.99
+      "price": 29.99,
+      "rating": 4.5
     },
     {
       "title": "The Code Breaker",
@@ -54,7 +57,8 @@
       "publishedAt": "2021-03-09T00:00:00.000Z",
       "genreId": "Biography",
       "type": "PAPER",
-      "price": 35.0
+      "price": 35.0,
+      "rating": 4.5
     },
     {
       "title": "The Four Winds",
@@ -68,7 +72,8 @@
       "publishedAt": "2021-02-02T00:00:00.000Z",
       "genreId": "Historical Fiction",
       "type": "ELECTRONIC",
-      "price": 27.99
+      "price": 27.99,
+      "rating": 4.5
     },
     {
       "title": "The Hill We Climb",
@@ -82,7 +87,8 @@
       "publishedAt": "2021-03-30T00:00:00.000Z",
       "genreId": "Poetry",
       "type": "PAPER",
-      "price": 15.99
+      "price": 15.99,
+      "rating": 4.5
     },
     {
       "title": "The Anthropocene Reviewed",
@@ -96,7 +102,8 @@
       "publishedAt": "2021-05-18T00:00:00.000Z",
       "genreId": "Non-Fiction",
       "type": "AUDIO",
-      "price": 24.99
+      "price": 24.99,
+      "rating": 5
     },
     {
       "title": "The Last Thing He Told Me",
@@ -110,7 +117,8 @@
       "publishedAt": "2021-05-04T00:00:00.000Z",
       "genreId": "Mystery",
       "type": "PAPER",
-      "price": 26.99
+      "price": 26.99,
+      "rating": 4.5
     },
     {
       "title": "The Push",
@@ -124,7 +132,8 @@
       "publishedAt": "2021-01-05T00:00:00.000Z",
       "genreId": "Psychological Thriller",
       "type": "ELECTRONIC",
-      "price": 24.99
+      "price": 24.99,
+      "rating": 2.5
     },
     {
       "title": "The Sanatorium",
@@ -138,7 +147,8 @@
       "publishedAt": "2021-02-02T00:00:00.000Z",
       "genreId": "Thriller",
       "type": "PAPER",
-      "price": 27.99
+      "price": 27.99,
+      "rating": 4.5
     },
     {
       "title": "The Invisible Life of Addie LaRue",
@@ -152,7 +162,8 @@
       "publishedAt": "2020-10-06T00:00:00.000Z",
       "genreId": "Fantasy",
       "type": "AUDIO",
-      "price": 26.99
+      "price": 26.99,
+      "rating": 4.5
     },
     {
       "title": "The Seven Husbands of Evelyn Hugo",
@@ -166,7 +177,8 @@
       "publishedAt": "2017-06-13T00:00:00.000Z",
       "genreId": "Contemporary Fiction",
       "type": "PAPER",
-      "price": 16.99
+      "price": 16.99,
+      "rating": 4
     },
     {
       "title": "Atomic Habits",
@@ -180,7 +192,8 @@
       "publishedAt": "2018-10-16T00:00:00.000Z",
       "genreId": "Self-Help",
       "type": "ELECTRONIC",
-      "price": 23.99
+      "price": 23.99,
+      "rating": 4.5
     },
     {
       "title": "The Thursday Murder Club",
@@ -193,7 +206,8 @@
       "publishedAt": "2020-09-03T00:00:00.000Z",
       "genreId": "Mystery",
       "type": "PAPER",
-      "price": 25.99
+      "price": 25.99,
+      "rating": 4.5
     },
     {
       "title": "The Vanishing Half",
@@ -207,7 +221,8 @@
       "publishedAt": "2020-06-02T00:00:00.000Z",
       "genreId": "Literary Fiction",
       "type": "ELECTRONIC",
-      "price": 26.99
+      "price": 26.99,
+      "rating": 4.5
     },
     {
       "title": "The Guest List",
@@ -221,7 +236,8 @@
       "publishedAt": "2020-06-02T00:00:00.000Z",
       "genreId": "Thriller",
       "type": "AUDIO",
-      "price": 27.99
+      "price": 27.99,
+      "rating": 4.5
     },
     {
       "title": "The House in the Cerulean Sea",
@@ -235,7 +251,8 @@
       "publishedAt": "2020-03-17T00:00:00.000Z",
       "genreId": "Fantasy",
       "type": "PAPER",
-      "price": 24.99
+      "price": 24.99,
+      "rating": 4.5
     }
   ]
 }

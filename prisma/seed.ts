@@ -34,6 +34,7 @@ async function main() {
     await prisma.book.create({
       data: {
         title: book.title,
+        slug: book.slug,
         author: book.author,
         description: book.description,
         image: book.image,
@@ -43,6 +44,7 @@ async function main() {
         publishedAt: new Date(book.publishedAt),
         type: book.type as BookType,
         price: book.price,
+        rating: book.rating,
         genreId: genre.id,
       },
     });
