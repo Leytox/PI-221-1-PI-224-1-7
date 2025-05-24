@@ -30,7 +30,7 @@ export async function getPopularBooks(
   try {
     return await prisma.book.findMany({
       orderBy: {
-        updatedAt: "desc",
+        updatedAt: "asc",
       },
       take: limit,
     });
