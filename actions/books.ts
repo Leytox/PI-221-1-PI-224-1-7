@@ -1,5 +1,5 @@
 "use server";
-import { Book, BookType } from "@/generated/prisma";
+import { Book, BookType, Genre } from "@/generated/prisma";
 import { prisma } from "@/lib/prisma";
 
 export async function getBooksCount(): Promise<number | null> {
@@ -14,7 +14,7 @@ export async function getNewTitles(limit: number = 3): Promise<Book[] | null> {
   try {
     return await prisma.book.findMany({
       orderBy: {
-        createdAt: 'desc',
+        createdAt: "desc",
       },
       take: limit,
     });
@@ -24,14 +24,13 @@ export async function getNewTitles(limit: number = 3): Promise<Book[] | null> {
   }
 }
 
-export async function getPopularBooks(limit: number = 3): Promise<Book[] | null> {
-  // For now, "popular" means most recently updated.
-  // This can be changed to a more sophisticated logic later (e.g., based on orders, views, or a curated list).
+export async function getPopularBooks(
+  limit: number = 3
+): Promise<Book[] | null> {
   try {
     return await prisma.book.findMany({
       orderBy: {
-        // We could also use a count of orders here if we add that relation or a view count
-        updatedAt: 'desc', // Placeholder for popularity
+        updatedAt: "desc",
       },
       take: limit,
     });
@@ -55,7 +54,7 @@ export async function createBook(
   description: string,
   genreId: string,
   type: BookType,
-  price: number,
+  price: number
 ): Promise<Book | null> {
   return await prisma.book.create({
     data: {
@@ -76,7 +75,7 @@ export async function updateBook(
   description: string,
   genreId: string,
   type: BookType,
-  price: number,
+  price: number
 ): Promise<Book | null> {
   return await prisma.book.update({
     where: {
@@ -99,4 +98,22 @@ export async function deleteBook(id: string): Promise<Book | null> {
       id,
     },
   });
+}
+
+export async function getBookBySlug(
+  slug: string
+): Promise<(Book & { genre: Genre }) | null> {
+  try {
+    return await prisma.book.findUnique({
+      where: {
+        slug,
+      },
+      include: {
+        genre: true,
+      },
+    });
+  } catch (error) {
+    console.error("Error fetching book by slug:", error);
+    return null;
+  }
 }
