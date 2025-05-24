@@ -19,21 +19,23 @@ export default async function BookPage({
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="relative aspect-[2/3] rounded-lg overflow-hidden">
-          <Image
-            src={book.image || "/placeholder-book.jpg"}
-            alt={book.title}
-            fill
-            className="object-cover"
-            priority
-          />
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-8 lg:gap-12 items-start">
+        <div className="md:col-span-2">
+          <div className="relative aspect-[3/4] w-full max-w-md mx-auto md:max-w-full rounded-lg overflow-hidden shadow-xl">
+            <Image
+              src={book.image || "/placeholder-book.jpg"}
+              alt={book.title}
+              fill 
+              sizes="(max-width: 768px) 100vw, 40vw" 
+              className="object-cover rounded-lg"
+              priority
+            />
+          </div>
         </div>
 
-        {/* Book Details */}
-        <div className="space-y-6">
+        <div className="md:col-span-3 space-y-6">
           <div>
-            <h1 className="text-4xl font-bold mb-2">{book.title}</h1>
+            <h1 className="text-3xl lg:text-4xl font-bold mb-2">{book.title}</h1>
             <p className="text-xl text-muted-foreground">by {book.author}</p>
           </div>
 
