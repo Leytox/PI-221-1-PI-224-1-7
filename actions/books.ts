@@ -117,3 +117,25 @@ export async function getBookBySlug(
     return null;
   }
 }
+
+export async function findBookByTitle(
+  title: string
+): Promise<string | null> {
+  try {
+    const book = await prisma.book.findFirst({
+      where: {
+        title: {
+          contains: title,
+          mode: "insensitive",
+        },
+      },
+      select: {
+        slug: true,
+      },
+    });
+    return book?.slug || null;
+  } catch (error) {
+    console.error("Error fetching book by title:", error);
+    return null;
+  }
+}
