@@ -1,6 +1,6 @@
 import { PrismaClient } from "@/generated/prisma";
-import books from "../mock/books.json";
-import genres from "../mock/genres.json";
+import books from "@/mock/books.json";
+import genres from "@/mock/genres.json";
 import { BookType } from "@/generated/prisma";
 const prisma = new PrismaClient();
 
