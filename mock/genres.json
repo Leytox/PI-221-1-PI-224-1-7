@@ -1,0 +1,43 @@
+{
+  "genres": [
+    {
+      "name": "Fiction"
+    },
+    {
+      "name": "Science Fiction"
+    },
+    {
+      "name": "Literary Fiction"
+    },
+    {
+      "name": "Biography"
+    },
+    {
+      "name": "Historical Fiction"
+    },
+    {
+      "name": "Poetry"
+    },
+    {
+      "name": "Non-Fiction"
+    },
+    {
+      "name": "Mystery"
+    },
+    {
+      "name": "Psychological Thriller"
+    },
+    {
+      "name": "Thriller"
+    },
+    {
+      "name": "Fantasy"
+    },
+    {
+      "name": "Contemporary Fiction"
+    },
+    {
+      "name": "Self-Help"
+    }
+  ]
+}
