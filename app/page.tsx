@@ -1,15 +1,14 @@
 import Link from "next/link";
-import BookCard from "@/components/BookCard";
-import TestimonialCard from "@/components/TestimonialCard";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { getPopularBooks, getNewTitles } from "@/actions/books";
 import { Book } from "@/generated/prisma";
 import SearchBookForm from "@/components/SearchBookForm";
+import { BookCarousel } from "@/components/ui/BookCarousel";
 
 export default async function HomePage() {
-  const popularBooksData = await getPopularBooks(4);
-  const newTitlesData = await getNewTitles(4);
+  const popularBooksData = await getPopularBooks(8);
+  const newTitlesData = await getNewTitles(8);
 
   const popularBooks: Book[] = popularBooksData || [];
   const newTitles: Book[] = newTitlesData || [];
@@ -49,42 +48,21 @@ export default async function HomePage() {
           </div>
         </div>
 
-        {/* Popular Books Section from HTML */}
-        <h2 className=" text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Popular Books</h2>
+        {/* Popular Books Section */}
+        <h2 className="text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Popular Books</h2>
         {popularBooks.length > 0 ? (
-          <div className="flex overflow-y-auto [-ms-scrollbar-style:none] [scrollbar-width:none] [&amp;::-webkit-scrollbar]:hidden">
-            <div className="flex items-stretch p-4 gap-3">
-              {popularBooks.map((book) => (
-                <div key={book.id} className="flex-none w-60"> 
-                  <BookCard
-                    slug={book.slug || ""}
-                    title={book.title}
-                    thumbnailUrl={book.image || ""} 
-                    author={book.author} 
-                  />
-                </div>
-              ))}
-            </div>
+          <div className="px-4 py-2">
+            <BookCarousel books={popularBooks} options={{ loop: true }} />
           </div>
         ) : (
           <p className="text-center text-muted-foreground px-4 py-5">(No popular books to display at the moment)</p>
         )}
 
-        <h2 className=" text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">New Releases</h2>
+        {/* New Releases Section */}
+        <h2 className="text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">New Releases</h2>
         {newTitles.length > 0 ? (
-          <div className="flex overflow-y-auto [-ms-scrollbar-style:none] [scrollbar-width:none] [&amp;::-webkit-scrollbar]:hidden">
-            <div className="flex items-stretch p-4 gap-3">
-              {newTitles.map((book) => (
-                 <div key={book.id} className="flex-none w-60"> 
-                  <BookCard
-                    slug={book.slug || ""}
-                    title={book.title}
-                    thumbnailUrl={book.image || ""}
-                    author={book.author}
-                  />
-                </div>
-              ))}
-            </div>
+          <div className="px-4 py-2">
+            <BookCarousel books={newTitles} options={{ loop: true }} />
           </div>
         ) : (
           <p className="text-center text-muted-foreground px-4 py-5">(No new titles to display at the moment)</p>
