@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { getBookBySlug } from "@/actions/books";
+import AddToCart from "@/components/AddToCart";
 
 export default async function BookPage({
   params,
@@ -25,8 +25,8 @@ export default async function BookPage({
             <Image
               src={book.image || "/placeholder-book.jpg"}
               alt={book.title}
-              fill 
-              sizes="(max-width: 768px) 100vw, 40vw" 
+              fill
+              sizes="(max-width: 768px) 100vw, 40vw"
               className="object-cover rounded-lg"
               priority
             />
@@ -35,7 +35,9 @@ export default async function BookPage({
 
         <div className="md:col-span-3 space-y-6">
           <div>
-            <h1 className="text-3xl lg:text-4xl font-bold mb-2">{book.title}</h1>
+            <h1 className="text-3xl lg:text-4xl font-bold mb-2">
+              {book.title}
+            </h1>
             <p className="text-xl text-muted-foreground">by {book.author}</p>
           </div>
 
@@ -95,11 +97,7 @@ export default async function BookPage({
             </div>
           </div>
 
-          <div className="flex gap-4 pt-4">
-            <Button size="lg" className="flex-1">
-              Add to Cart
-            </Button>
-          </div>
+          <AddToCart bookId={book.id} />
         </div>
       </div>
     </div>
