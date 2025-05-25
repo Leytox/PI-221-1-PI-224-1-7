@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { findBookByTitle } from "@/actions/books"; // Import the server action
+import { findBookByTitle } from "@/actions/books";
 import { toast } from "sonner";
 const MagnifyingGlassIconHero = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
@@ -18,7 +18,7 @@ export default function SearchBookForm() {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
   const [error, setError] = useState<string | null>(null);
-  const [isSearching, setIsSearching] = useState(false); // For loading state
+  const [isSearching, setIsSearching] = useState(false);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();

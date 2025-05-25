@@ -2,9 +2,9 @@ import { auth } from "@/auth";
 import Link from "next/link";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { LogOut, LogIn, ShoppingCart } from "lucide-react";
 import { Role } from "@/generated/prisma";
+import HeaderSearchForm from "./HeaderSearchForm";
 
 export default async function Header() {
   const session = await auth();
@@ -18,19 +18,19 @@ export default async function Header() {
       </Link>
 
       <div className="hidden min-[580]:flex flex-1 mx-6 max-w-xl">
-        <Input type="text" placeholder="Search books..." className="w-full" />
+        <HeaderSearchForm />
       </div>
 
       <div className="flex items-center gap-1">
         {role === Role.MANAGER && (
-          <Link href="/manager">
+          <Link href="/dashboard">
             <Button variant="secondary" className="hidden min-[580px]:flex">
               Manager
             </Button>
           </Link>
         )}
         {role === Role.ADMIN && (
-          <Link href="/admin">
+          <Link href="/dashboard">
             <Button variant="secondary" className="hidden min-[580px]:flex">
               Admin
             </Button>
