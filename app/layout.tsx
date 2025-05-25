@@ -5,6 +5,8 @@ import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import GoTop from "@/components/GoTop";
 import { Toaster } from "@/components/ui/sonner";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -41,9 +43,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <Header />
           {children}
           <GoTop />
           <Toaster />
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
