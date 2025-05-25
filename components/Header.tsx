@@ -4,9 +4,12 @@ import { ThemeSwitcher } from "./ThemeSwitcher";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { LogOut, LogIn, ShoppingCart } from "lucide-react";
+import { Role } from "@/generated/prisma";
 
 export default async function Header() {
   const session = await auth();
+  const role = session?.user?.role;
+  console.log(role === Role.MANAGER);
 
   return (
     <header className="w-full bg-background border-b border-border py-4 px-6 flex flex-row items-center justify-between gap-3 min-[570px]:gap-0">
@@ -18,7 +21,22 @@ export default async function Header() {
         <Input type="text" placeholder="Search books..." className="w-full" />
       </div>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-1">
+        {role === Role.MANAGER && (
+          <Link href="/manager">
+            <Button variant="secondary" className="hidden min-[580px]:flex">
+              Manager
+            </Button>
+          </Link>
+        )}
+        {role === Role.ADMIN && (
+          <Link href="/admin">
+            <Button variant="secondary" className="hidden min-[580px]:flex">
+              Admin
+            </Button>
+          </Link>
+        )}
+
         <ThemeSwitcher />
 
         {!session ? (
@@ -29,11 +47,11 @@ export default async function Header() {
           </Link>
         ) : (
           <>
-            <Link href="/cart">
+            {role === Role.USER && <Link href="/cart">
               <Button variant="ghost" className="min-[580]:hidden p-2">
                 <ShoppingCart className="w-5 h-5" />
               </Button>
-            </Link>
+            </Link>}
             <form action="/logout" method="POST">
               <input type="hidden" name="callbackUrl" value="/" />
               <Button type="submit" variant="outline" className="min-[580]:hidden p-2">
@@ -49,9 +67,9 @@ export default async function Header() {
           </Link>
         ) : (
           <>
-            <Link href="/cart">
+            {role === Role.USER && <Link href="/cart">
               <Button variant="ghost" className="hidden min-[580]:flex">Cart</Button>
-            </Link>
+            </Link>}
             <form action="/logout" method="POST">
               <input type="hidden" name="callbackUrl" value="/" />
               <Button type="submit" variant="outline" className="hidden min-[580]:flex">Logout</Button>
