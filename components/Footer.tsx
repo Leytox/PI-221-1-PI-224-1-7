@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-100 border-t border-gray-300 py-10 px-6 mt-[100vh]">
+    <footer className="border-t py-10 px-6">
       {/* >=770px — 4 колонки */}
       <div className="hidden min-[770px]:grid grid-cols-1 md:grid-cols-4 gap-8 max-w-7xl mx-auto">
         <ContactInfo />
@@ -63,10 +63,46 @@ function FollowUs() {
     <div>
       <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
       <ul className="space-y-2">
-        <li><a href="https://facebook.com" className="text-blue-600 hover:underline" target="_blank" rel="noreferrer">Facebook</a></li>
-        <li><a href="https://twitter.com" className="text-blue-400 hover:underline" target="_blank" rel="noreferrer">Twitter</a></li>
-        <li><a href="https://instagram.com" className="text-pink-500 hover:underline" target="_blank" rel="noreferrer">Instagram</a></li>
-        <li><a href="https://linkedin.com" className="text-blue-700 hover:underline" target="_blank" rel="noreferrer">LinkedIn</a></li>
+        <li>
+          <a
+            href="https://facebook.com"
+            className="text-blue-600 hover:underline"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Facebook
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://twitter.com"
+            className="text-blue-400 hover:underline"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Twitter
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://instagram.com"
+            className="text-pink-500 hover:underline"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Instagram
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://linkedin.com"
+            className="text-blue-700 hover:underline"
+            target="_blank"
+            rel="noreferrer"
+          >
+            LinkedIn
+          </a>
+        </li>
       </ul>
     </div>
   );
@@ -77,17 +113,41 @@ function QuickLinks({ legal = false }: { legal?: boolean }) {
     <div>
       <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
       <ul className="space-y-2">
-        <li><Link href="/" className="hover:underline">Home</Link></li>
-        <li><Link href="/about" className="hover:underline">About Us</Link></li>
-        <li><Link href="/catalog" className="hover:underline">Catalog</Link></li>
-        <li><Link href="/contact" className="hover:underline">Contact</Link></li>
+        <li>
+          <Link href="/" className="hover:underline">
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link href="/about" className="hover:underline">
+            About Us
+          </Link>
+        </li>
+        <li>
+          <Link href="/catalog" className="hover:underline">
+            Catalog
+          </Link>
+        </li>
+        <li>
+          <Link href="/contact" className="hover:underline">
+            Contact
+          </Link>
+        </li>
       </ul>
       {legal && (
         <>
           <h3 className="text-lg font-semibold mt-8 mb-4">Legal</h3>
           <ul className="space-y-2">
-            <li><Link href="/privacy-policy" className="hover:underline">Privacy Policy</Link></li>
-            <li><Link href="/terms-of-use" className="hover:underline">Terms of Use</Link></li>
+            <li>
+              <Link href="/privacy-policy" className="hover:underline">
+                Privacy Policy
+              </Link>
+            </li>
+            <li>
+              <Link href="/terms-of-use" className="hover:underline">
+                Terms of Use
+              </Link>
+            </li>
           </ul>
         </>
       )}
