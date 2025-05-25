@@ -9,7 +9,6 @@ import HeaderSearchForm from "./HeaderSearchForm";
 export default async function Header() {
   const session = await auth();
   const role = session?.user?.role;
-  console.log(role === Role.MANAGER);
 
   return (
     <header className="w-full bg-background border-b border-border py-4 px-6 flex flex-row items-center justify-between gap-3 min-[570px]:gap-0">

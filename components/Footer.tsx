@@ -40,8 +40,8 @@ function ContactInfo() {
   return (
     <div>
       <h3 className="text-lg font-semibold mb-4">Contact Info</h3>
-      <p>123 Main Street, Cityville, Country</p>
-      <p>Phone: +1 (555) 123-4567</p>
+      <p>Heroiv Dnipra 5, Kyiv, Ukraine</p>
+      <p>Phone: +380 67 123 45 67</p>
       <p>Email: contact@superlibrary.com</p>
     </div>
   );
@@ -124,7 +124,7 @@ function QuickLinks({ legal = false }: { legal?: boolean }) {
           </Link>
         </li>
         <li>
-          <Link href="/catalog" className="hover:underline">
+          <Link href="/books" className="hover:underline">
             Catalog
           </Link>
         </li>
